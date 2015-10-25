@@ -12,19 +12,25 @@ public class cvsFileSearch {
     public void tester() {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        String s =countryinfo(parser, "Germany");
+        String s =countryinfo(parser, "Nauru");
         System.out.println(s);
         parser = fr.getCSVParser();
+        System.out.println("These contries exports fish and nuts ");
         listExportTwoProduct(parser,"gold","diamonds");
         parser = fr.getCSVParser();
-        System.out.println(numberOfExporters(parser,"gold"));
-
+        System.out.println(numberOfExporters(parser,"sugar"));
+        parser = fr.getCSVParser();
+        bigExporters(parser,"$999,999,999,999", 1);
     }
     
-    public void bigExporter ( CSVParser parser, String amount,int value){
+    public void bigExporters ( CSVParser parser, String amount,int value){
     
         for(CSVRecord record : parser ) {
-            
+         String val =  record.get("Value (dollars)");
+         if(val.length() > amount.length()) {
+          System.out.print(record.get("Country")+ ":  ");
+          System.out.println(val);
+         }
         }
     } 
     
@@ -45,7 +51,8 @@ public class cvsFileSearch {
         for(CSVRecord rec : ps){
             String expItem = rec.get("Exports");
             if(expItem.contains(exportItem1) && expItem.contains(exportItem2) ){
-            System.out.println(rec.get("Country"));
+            System.out.print(rec.get("Country")+ ":  ");
+            System.out.println(rec.get("Exports"));
           }
         }
         
@@ -58,7 +65,8 @@ public class cvsFileSearch {
         for( CSVRecord record : parser){
 
             String temp = record.get( "Country");
-            if(temp.contains(country)){
+           // if(temp.contains(country)){
+               if (record.get("Country").equals(country)) {
                 result = temp +": "+ record.get("Exports") +": "+ record.get("Value (dollars)");
 
             }
