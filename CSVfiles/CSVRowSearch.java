@@ -8,7 +8,7 @@
 import edu.duke.*;
 import org.apache.commons.csv.*;
 
-public class CVSRowSearch {
+public class CSVRowSearch {
     
     public void listExporters( CSVParser parser, String exportOfinterest) {
      for ( CSVRecord record : parser ) {   

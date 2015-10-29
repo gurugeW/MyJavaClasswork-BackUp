@@ -16,9 +16,10 @@ public class cvsFileSearch {
         System.out.println(s);
         parser = fr.getCSVParser();
         System.out.println("These contries exports fish and nuts ");
-        listExportTwoProduct(parser,"gold","diamonds");
+        listExportTwoProduct(parser,"cotton","flowers");
         parser = fr.getCSVParser();
-        System.out.println(numberOfExporters(parser,"sugar"));
+        System.out.println("expeort Cocoa");
+        System.out.println(numberOfExporters(parser,"cocoa"));
         parser = fr.getCSVParser();
         bigExporters(parser,"$999,999,999,999", 1);
     }

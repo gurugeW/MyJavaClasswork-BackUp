@@ -9,18 +9,7 @@ public class CSVMax {
 public CSVRecord hottestHourInFile(CSVParser parser) {
     CSVRecord largestSoFar = null;
     for( CSVRecord currentRow : parser ) {
-        if(largestSoFar == null) {
-            largestSoFar = currentRow;
-            
-        }
-        else {
-         double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));   
-          double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));  
-          
-          if(currentTemp > largestTemp) {
-              largestSoFar = currentRow;
-            }
-        }
+     largestSoFar = getLargestOfTwo( currentRow, largestSoFar );  
     }
     return largestSoFar;
 }
@@ -38,22 +27,8 @@ public CSVRecord hottestInManyDays() {
     DirectoryResource dr = new DirectoryResource();
     for( File f : dr.selectedFiles()) {
       FileResource fr = new FileResource(f);
-     CSVRecord currentRow = hottestHourInFile(fr.getCSVParser()); 
-     if (largestSoFar == null ) {
-         largestSoFar = currentRow;
-        }
-        else {
-          double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));   
-          double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));  
-          
-          if(currentTemp > largestTemp) {
-              largestSoFar = currentRow;
-            }
-            
-        
-         
-    }
-    
+      CSVRecord currentRow = hottestHourInFile(fr.getCSVParser()); 
+      largestSoFar = getLargestOfTwo( currentRow, largestSoFar );
 }
 return largestSoFar;
 }
@@ -65,7 +40,21 @@ public void testHottestInManyDays() {
     
 }
 
-
+public CSVRecord getLargestOfTwo( CSVRecord currentRow, CSVRecord largestSoFar ) {
+     if(largestSoFar == null) {
+            largestSoFar = currentRow;
+            
+        }
+        else {
+         double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));   
+          double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));  
+          
+          if(currentTemp > largestTemp) {
+              largestSoFar = currentRow;
+            }
+        }
+        return largestSoFar;
+}
 
 }
 
